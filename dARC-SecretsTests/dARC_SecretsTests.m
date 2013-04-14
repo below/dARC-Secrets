@@ -7,26 +7,21 @@
 //
 
 #import "dARC_SecretsTests.h"
+#import "DerivedClass.h"
 
 @implementation dARC_SecretsTests
 
-- (void)setUp
+- (void)testErrorExample
 {
-    [super setUp];
+    BaseClass * testClass = [DerivedClass new];
     
-    // Set-up code here.
-}
-
-- (void)tearDown
-{
-    // Tear-down code here.
+    if ([testClass performTest]) {
+        NSLog (@"The number is even");
+    }
+    else {
+        NSLog(@"The number is odd");
+    }
     
-    [super tearDown];
-}
-
-- (void)testExample
-{
-    STFail(@"Unit tests are not implemented yet in dARC-SecretsTests");
 }
 
 @end

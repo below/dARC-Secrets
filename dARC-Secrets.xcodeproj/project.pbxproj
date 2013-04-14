@@ -21,6 +21,10 @@
 		CBD945D0171B53360076B90B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBD945B1171B53360076B90B /* Foundation.framework */; };
 		CBD945D8171B53360076B90B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CBD945D6171B53360076B90B /* InfoPlist.strings */; };
 		CBD945DB171B53360076B90B /* dARC_SecretsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CBD945DA171B53360076B90B /* dARC_SecretsTests.m */; };
+		CBD945E8171B54750076B90B /* BaseClass.m in Sources */ = {isa = PBXBuildFile; fileRef = CBD945E5171B54750076B90B /* BaseClass.m */; };
+		CBD945E9171B54750076B90B /* BaseClass.m in Sources */ = {isa = PBXBuildFile; fileRef = CBD945E5171B54750076B90B /* BaseClass.m */; };
+		CBD945EA171B54750076B90B /* DerivedClass.m in Sources */ = {isa = PBXBuildFile; fileRef = CBD945E7171B54750076B90B /* DerivedClass.m */; };
+		CBD945EB171B54750076B90B /* DerivedClass.m in Sources */ = {isa = PBXBuildFile; fileRef = CBD945E7171B54750076B90B /* DerivedClass.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +57,10 @@
 		CBD945D7171B53360076B90B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		CBD945D9171B53360076B90B /* dARC_SecretsTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dARC_SecretsTests.h; sourceTree = "<group>"; };
 		CBD945DA171B53360076B90B /* dARC_SecretsTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = dARC_SecretsTests.m; sourceTree = "<group>"; };
+		CBD945E4171B54750076B90B /* BaseClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseClass.h; sourceTree = "<group>"; };
+		CBD945E5171B54750076B90B /* BaseClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseClass.m; sourceTree = "<group>"; };
+		CBD945E6171B54750076B90B /* DerivedClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DerivedClass.h; sourceTree = "<group>"; };
+		CBD945E7171B54750076B90B /* DerivedClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DerivedClass.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +122,10 @@
 			children = (
 				CBD945BE171B53360076B90B /* AppDelegate.h */,
 				CBD945BF171B53360076B90B /* AppDelegate.m */,
+				CBD945E4171B54750076B90B /* BaseClass.h */,
+				CBD945E5171B54750076B90B /* BaseClass.m */,
+				CBD945E6171B54750076B90B /* DerivedClass.h */,
+				CBD945E7171B54750076B90B /* DerivedClass.m */,
 				CBD945B6171B53360076B90B /* Supporting Files */,
 			);
 			path = "dARC-Secrets";
@@ -263,6 +275,8 @@
 			files = (
 				CBD945BC171B53360076B90B /* main.m in Sources */,
 				CBD945C0171B53360076B90B /* AppDelegate.m in Sources */,
+				CBD945E8171B54750076B90B /* BaseClass.m in Sources */,
+				CBD945EA171B54750076B90B /* DerivedClass.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -271,6 +285,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				CBD945DB171B53360076B90B /* dARC_SecretsTests.m in Sources */,
+				CBD945E9171B54750076B90B /* BaseClass.m in Sources */,
+				CBD945EB171B54750076B90B /* DerivedClass.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -435,6 +451,7 @@
 				CBD945E0171B53360076B90B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		CBD945E1171B53360076B90B /* Build configuration list for PBXNativeTarget "dARC-SecretsTests" */ = {
 			isa = XCConfigurationList;
@@ -443,6 +460,7 @@
 				CBD945E3171B53360076B90B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
