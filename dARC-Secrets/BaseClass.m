@@ -20,7 +20,7 @@
 }
 
 - (id) doFoo {
-    NSAssert(false, @"Abstract implementation");
+    NSAssert(NO, @"Abstract implementation");
     return nil;
 }
 @end
