@@ -9,7 +9,7 @@ It should be noted that the problem shown here is not a fault in ARC, but in the
 
 ### Shooting Yourself in the Foot
 
-What happended that my code crashed:
+So my code crashed:
 
 	EXC_BAD_ACCESS (code=2, address=0x1)
 
@@ -20,7 +20,7 @@ Address = 0x01? Retain? In a condition test? What?
 
 ### Finding the Bullet
 
-The project in which this happened of course was much larger and more complex than the sample, so I searched in all the places that looked like the usual suspects. I fired up Instruments, enabled Zombies, but nothing really go me any closer.
+The project in which this happened of course was much larger and more complex than the sample, so I searched in all the places that looked like the usual suspects. I fired up Instruments, enabled Zombies, but nothing really got any closer.
 
 To add to the confusion, the code worked when I moved it from the base class to a subclass. 
 
@@ -49,7 +49,7 @@ Now, because in `BaseClass.m` ARC only sees `- (id) doFoo`, ARC produces code wh
 
 Let's go back one step: The crash was caused in the statement `if ([self doFoo])`. The return value is only used for a conditional test, and it should not matter if we passed an autoreleased object or a boolean variable into it. Why then does ARC even try to retain the value? In non-ARC code, there would most certainly not be a `retain` here anywhere.
 
-Looking closely, it does not. When we examine the assembly for the code, we can see that actually a function `\_objc\_retainAutoreleasedReturnValue` is being called. Now, "Retain Autoreleased Return Value" is a curious name unlike anything we have seen outside of ARC code, It is well worth looking into.
+Looking very closely, there is not exactly a `retain` here either. When we examine the assembly for the code, we can see that actually a function `\_objc\_retainAutoreleasedReturnValue` is being called. Now, "Retain Autoreleased Return Value" is a curious name unlike anything we have seen outside of ARC code, It is well worth looking into.
 
 We find interesting information about this in the Objective-C runtime, which is luckily open source, specifically in the file [objc-arr.mm](http://www.opensource.apple.com/source/objc4/objc4-493.11/runtime/objc-arr.mm "objc-arr.mm"):
 
