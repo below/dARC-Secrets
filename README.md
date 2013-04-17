@@ -51,13 +51,13 @@ Let's go back one step: The crash was caused in the statement `if ([self doFoo])
 
 Looking very closely, there is not exactly a `retain` here either. When we examine the assembly for the code, we can see that actually a function `\_objc\_retainAutoreleasedReturnValue` is being called. Now, "Retain Autoreleased Return Value" is a curious name unlike anything we have seen outside of ARC code, It is well worth looking into.
 
-We find interesting information about this in the Objective-C runtime, which is luckily open source, specifically in the file [objc-arr.mm](http://www.opensource.apple.com/source/objc4/objc4-493.11/runtime/objc-arr.mm "objc-arr.mm"):
+We find interesting information about this in the Objective-C runtime, which luckily is open source, specifically in the file [objc-arr.mm](http://www.opensource.apple.com/source/objc4/objc4-493.11/runtime/objc-arr.mm "objc-arr.mm"):
 
 >  The caller and callee cooperate to keep the returned object  out of the autorelease pool.
 
 So what ARC tries to do to improve performance, is actually to avoid putting things into the autorelease pool (ARP). It does so by putting little hints into the code:
 
-The callee (i.e. the method being called) uses the function `objc\_autoreleaseReturnValue()` to examine the caller's instructions immediately following the return. If they call `objc\_autoreleaseReturnValue` (which is actually indicated by the assembly NOP `mov	r7, r7`), then the callee does not send `autorelease` to the returned object, but instead stores the result in thread-local storage.
+The callee (i.e. the method being called) uses the function `objc\_autoreleaseReturnValue()` to examine the instruction at the return address. If they call `objc\_autoreleaseReturnValue` (which is actually indicated by the assembly NOP `mov	r7, r7`), then the callee does not send `autorelease` to the returned object, but instead stores the result in thread-local storage.
 
 As we have seen, the caller calls `objc\_retainAutoreleasedReturnValue`, which checks if the returned value is the same as in the thread-local storage. If it is, then the value is used directly, completely bypassing the autorelease pool. If it is _not_ then `objc_retain` is called, which is exactly what has happend in our case.
 
@@ -75,7 +75,7 @@ The autorelease pool postpones the release to sometime in the future. Without AR
 	NSLog (output);
 	[output release];
 
-Other than less typing, there is absolutely no benefit in the ARP version. But now, with ARC, the compiler can deliver us from all the pesky typing and can insert the manual release calls automatically. 
+Other than less typing, there is absolutely no benefit in the ARP version. But now, with ARC, the compiler can deliver us from all the pesky typing by inserting the manual release calls automatically. 
 
 And even when we think that nothing needs to be retained in the case of a simple `if` statement, ARC attempts to avoid using an autorelese pool here just as well. Looking at the assembly, we find proof of that:
 
@@ -83,7 +83,7 @@ And even when we think that nothing needs to be retained in the case of a simple
 	str	r0, [sp]                @ 4-byte Spill
 	bl	_objc_release
 
-And this is the complete explaination, why the crash happens.
+And this is the complete explanation, why the crash happens.
 
 ### Lessons Learned
 
