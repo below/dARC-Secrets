@@ -14,7 +14,7 @@ What happended that my code crashed:
 	EXC_BAD_ACCESS (code=2, address=0x1)
 
 `EXC_BAD_ACCES` means that the machine attempted to access memory at an illegal location. `0x01` is very obviously illegal.
-This happend in a somewhat surprising location: `libobjc.A.dylib\`objc\_retain\`. Going up the stacktrace on step to my own code led me to a seemingly insuspicious call: `if ([self doFoo])`.
+This happend in a somewhat surprising location: `libobjc.A.dylib\`objc\_retain\`. Going up the stacktrace one step to my own code led me to a seemingly insuspicious call: `if ([self doFoo])`.
 
 Address = 0x01? Retain? In a condition test? What?
 
